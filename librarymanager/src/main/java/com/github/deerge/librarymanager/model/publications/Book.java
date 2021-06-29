@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("BOOK")
 public class Book extends Publication {
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH, CascadeType.DETACH })
     @JoinTable(name = "pub_authors_publications",
             joinColumns = @JoinColumn(name = "publication_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id")
