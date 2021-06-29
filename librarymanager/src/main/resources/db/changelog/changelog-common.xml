@@ -7,4 +7,5 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 
     <property name="id.start.value" value="1000000"/>
+    <property name="timestamp.type" value="timestamp" dbms="postgresql"/>
 </databaseChangeLog>
