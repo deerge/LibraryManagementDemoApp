@@ -8,11 +8,7 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "publication_type")
 @Table(name = "pub_publications")
-public class Publication {
-
-    //Книга определяется Названием, Автором, Языком текста, Годом выпуска
-    //Журнал определяется Названием, Языком текста, Годом выпуска, Номером выпуска
-
+public abstract class Publication {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
