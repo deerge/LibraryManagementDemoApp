@@ -1,0 +1,33 @@
+package com.github.deerge.librarymanager.controller.publications;
+
+import com.github.deerge.librarymanager.api.publications.JournalApi;
+import com.github.deerge.librarymanager.dto.publications.JournalDto;
+import io.micrometer.core.lang.NonNull;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController()
+@RequestMapping("/journal")
+public class JournalsController {
+    private final JournalApi journalApi;
+
+    public JournalsController(@NonNull JournalApi journalApi) {
+        this.journalApi = journalApi;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<JournalDto> getById(@PathVariable long id) {
+        return ResponseEntity.ok(journalApi.getJournalById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<JournalDto> createJournal(JournalDto journalDto) {
+        return ResponseEntity.ok(journalApi.createJournal(journalDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> removeJournal(@PathVariable long id) {
+        journalApi.removeJournal(id);
+        return ResponseEntity.ok().build();
+    }
+}

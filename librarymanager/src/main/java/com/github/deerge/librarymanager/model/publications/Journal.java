@@ -1,4 +1,4 @@
-package com.github.deerge.librarymanager.model;
+package com.github.deerge.librarymanager.model.publications;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

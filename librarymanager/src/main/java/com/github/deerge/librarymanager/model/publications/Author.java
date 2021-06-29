@@ -1,10 +1,9 @@
-package com.github.deerge.librarymanager.model;
+package com.github.deerge.librarymanager.model.publications;
 
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity

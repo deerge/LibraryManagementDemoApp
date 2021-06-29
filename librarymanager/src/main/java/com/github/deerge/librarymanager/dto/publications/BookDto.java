@@ -1,4 +1,4 @@
-package com.github.deerge.librarymanager.dto;
+package com.github.deerge.librarymanager.dto.publications;
 
 
 import org.springframework.lang.NonNull;
