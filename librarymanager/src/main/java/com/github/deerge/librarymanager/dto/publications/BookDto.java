@@ -1,17 +1,17 @@
 package com.github.deerge.librarymanager.dto.publications;
 
 
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 
 public class BookDto extends PublicationDto {
-    @NonNull
-    private AuthorDto authorDto;
+    @NotNull
+    private AuthorDto author;
 
-    public AuthorDto getAuthorDto() {
-        return authorDto;
+    public AuthorDto getAuthor() {
+        return author;
     }
 
-    public void setAuthorDto(AuthorDto authorDto) {
-        this.authorDto = authorDto;
+    public void setAuthor(AuthorDto author) {
+        this.author = author;
     }
 }

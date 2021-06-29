@@ -2,8 +2,7 @@ package com.github.deerge.librarymanager.dto.security;
 
 import com.github.deerge.librarymanager.model.security.UserRole;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class UserDto {
     private Long id;
@@ -15,6 +14,7 @@ public class UserDto {
     @Size(min = 3)
     private String password;
     private boolean isActive;
+    @NotBlank
     private UserRole userRole;
 
     public Long getId() {

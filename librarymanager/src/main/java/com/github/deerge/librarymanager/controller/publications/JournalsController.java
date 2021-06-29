@@ -4,6 +4,7 @@ import com.github.deerge.librarymanager.api.publications.JournalApi;
 import com.github.deerge.librarymanager.dto.publications.JournalDto;
 import io.micrometer.core.lang.NonNull;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
@@ -21,7 +22,7 @@ public class JournalsController {
     }
 
     @PostMapping
-    public ResponseEntity<JournalDto> createJournal(JournalDto journalDto) {
+    public ResponseEntity<JournalDto> createJournal(@Validated @RequestBody JournalDto journalDto) {
         return ResponseEntity.ok(journalApi.createJournal(journalDto));
     }
 

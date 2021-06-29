@@ -22,7 +22,7 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<BookDto> createBook(@Validated BookDto bookDto) {
+    public ResponseEntity<BookDto> createBook(@Validated @RequestBody BookDto bookDto) {
         return ResponseEntity.ok(booksApi.createBook(bookDto));
     }
 

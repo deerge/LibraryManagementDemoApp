@@ -1,11 +1,16 @@
 package com.github.deerge.librarymanager.dto.publications;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class PublicationDto {
     private Long id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String textLanguage;
+    @NotNull
     private Date issueDate;
 
     public Long getId() {
