@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
-@RequestMapping("/journal")
+@RequestMapping("/journals")
 public class JournalsController {
     private final JournalApi journalApi;
 

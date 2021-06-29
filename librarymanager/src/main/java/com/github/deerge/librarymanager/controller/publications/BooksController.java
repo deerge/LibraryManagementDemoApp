@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
-@RequestMapping("/book")
+@RequestMapping("/books")
 public class BooksController {
     private final BooksApi booksApi;
 
