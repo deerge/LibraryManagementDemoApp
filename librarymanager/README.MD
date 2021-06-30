@@ -1,12 +1,12 @@
-##Library management api demo application
+## Library management api demo application
 
-Requirements:
+**Requirements:**
 Jdk 13+,
 Postgres 10
 
 **base api endpoint path:** http:/host/api;
 
-###available endpoints:
+### available endpoints:
 type   | path           | description
 -------|----------------|-------------
 POST   | /users/signup  | register user
