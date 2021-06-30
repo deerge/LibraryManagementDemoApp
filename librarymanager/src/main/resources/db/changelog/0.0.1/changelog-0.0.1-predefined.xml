@@ -47,7 +47,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="version" valueNumeric="0"/>
             <column name="title" value="National Geographic"/>
             <column name="text_language" value="English"/>
-            <column name="issue_date" valueDate="1912-04-01"/>
+            <column name="issue_date" valueDate="2012-04-01"/>
             <column name="publication_number" value="1492"/>
             <column name="publication_type" value="JOURNAL"/>
         </insert>
