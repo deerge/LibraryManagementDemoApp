@@ -1,12 +1,16 @@
 package com.github.deerge.librarymanager.api.publications;
 
 import com.github.deerge.librarymanager.dto.publications.JournalDto;
+import com.github.deerge.librarymanager.dto.publications.JournalSearchInput;
 import com.github.deerge.librarymanager.model.publications.Journal;
 import com.github.deerge.librarymanager.repository.publications.JournalsRepository;
 import io.micrometer.core.lang.NonNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Transactional
@@ -32,5 +36,19 @@ public class JournalApi {
 
     public void removeJournal(long id) {
         journalsRepository.deleteById(id);
+    }
+
+    public List<JournalDto> searchJournals(JournalSearchInput searchInput) {
+        var exampleJournal = new Journal();
+        exampleJournal.setIssueDate(searchInput.getIssueDate());
+        exampleJournal.setTitle(searchInput.getTitle());
+        exampleJournal.setTextLanguage(searchInput.getTextLanguage());
+        exampleJournal.setPublicationNumber(searchInput.getPublicationNumber());
+
+        var journalDtos = journalsRepository.search(exampleJournal)
+                .stream()
+                .map(j -> modelMapper.map(j, JournalDto.class))
+                .collect(Collectors.toList());
+        return journalDtos;
     }
 }

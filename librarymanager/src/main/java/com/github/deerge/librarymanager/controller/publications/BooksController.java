@@ -2,10 +2,13 @@ package com.github.deerge.librarymanager.controller.publications;
 
 import com.github.deerge.librarymanager.api.publications.BooksApi;
 import com.github.deerge.librarymanager.dto.publications.BookDto;
+import com.github.deerge.librarymanager.dto.publications.BookSearchInput;
 import io.micrometer.core.lang.NonNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("/books")
@@ -30,5 +33,12 @@ public class BooksController {
     public ResponseEntity<Long> removeBook(@PathVariable long id) {
         booksApi.removeBook(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<BookDto>> searchBooks(@NonNull BookSearchInput searchInput) {
+        var books = booksApi.searchBooks(searchInput);
+
+        return ResponseEntity.ok(books);
     }
 }

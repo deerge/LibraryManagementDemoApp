@@ -2,10 +2,13 @@ package com.github.deerge.librarymanager.controller.publications;
 
 import com.github.deerge.librarymanager.api.publications.JournalApi;
 import com.github.deerge.librarymanager.dto.publications.JournalDto;
+import com.github.deerge.librarymanager.dto.publications.JournalSearchInput;
 import io.micrometer.core.lang.NonNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("/journals")
@@ -30,5 +33,10 @@ public class JournalsController {
     public ResponseEntity<Long> removeJournal(@PathVariable long id) {
         journalApi.removeJournal(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<JournalDto>> searchJournals(JournalSearchInput searchInput) {
+        return ResponseEntity.ok(journalApi.searchJournals(searchInput));
     }
 }
