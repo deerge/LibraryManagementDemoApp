@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="2021-06-29 #1 add predefined user" author="Dmitriy Gerasimenko" context="prod">
+        <insert tableName="sec_users">
+            <column name="id" valueNumeric="1"/>
+            <column name="version" valueNumeric="0"/>
+            <column name="email" value="testUser@localhost.localhost"/>
+            <column name="first_name" value="Test"/>
+            <column name="last_name" value="User"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="password" value="$2a$10$DDK7yjdmjHM0UnYRAIDwwumhi1wmALqC.sVHiD0.eN/J8Mcy5.Ley"/>
+            <column name="user_role" value="USER"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2021-06-29 #1 add predefined autor and book" author="Dmitriy Gerasimenko">
+        <insert tableName="pub_authors">
+            <column name="id" valueNumeric="100"/>
+            <column name="version" valueNumeric="0"/>
+            <column name="first_name" value="Александр"/>
+            <column name="last_name" value="Беляев"/>
+            <column name="middle_name" value="Романович"/>
+        </insert>
+        <insert tableName="pub_publications">
+            <column name="id" valueNumeric="100"/>
+            <column name="version" valueNumeric="0"/>
+            <column name="title" value="Голова профессора Доуэля"/>
+            <column name="text_language" value="Русский"/>
+            <column name="issue_date" valueDate="1925-01-01"/>
+            <column name="publication_type" value="BOOK"/>
+        </insert>
+        <insert tableName="pub_authors_publications">
+            <column name="id" valueNumeric="100"/>
+            <column name="author_id" valueNumeric="100"/>
+            <column name="publication_id" valueNumeric="100"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2021-06-29 #1 add predefined journal" author="Dmitriy Gerasimenko">
+        <insert tableName="pub_publications">
+            <column name="id" valueNumeric="101"/>
+            <column name="version" valueNumeric="0"/>
+            <column name="title" value="National Geographic"/>
+            <column name="text_language" value="English"/>
+            <column name="issue_date" valueDate="2012-04-01"/>
+            <column name="publication_number" value="1492"/>
+            <column name="publication_type" value="JOURNAL"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

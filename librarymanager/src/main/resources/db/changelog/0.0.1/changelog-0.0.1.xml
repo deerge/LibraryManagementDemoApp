@@ -5,5 +5,100 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="2021-06-28 #1 Hibernate Init" author="Dmitriy Gerasimenko" context="prod" dbms="postgresql">
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="${id.start.value}"/>
+    </changeSet>
+
+    <changeSet id="2021-06-28 #1 add authors model" author="Dmitriy Gerasimenko" context="prod">
+        <createTable tableName="pub_authors">
+            <column name="id" remarks="Primary key" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_pub_authors"/>
+            </column>
+            <column name="version" remarks="Entity version" type="java.sql.Types.INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" remarks="Author first name" type="java.sql.Types.VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" remarks="Author last name" type="java.sql.Types.VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" remarks="Author middle name" type="java.sql.Types.VARCHAR(100)"/>
+        </createTable>
+
+        <sql dbms="postgresql">select setval('pub_authors_id_seq', ${id.start.value});</sql>
+    </changeSet>
+
+    <changeSet id="2021-06-28 #1 add publications model" author="Dmitriy Gerasimenko" context="prod">
+        <createTable tableName="pub_publications" remarks="table for store publications">
+            <column name="id" remarks="Primary key" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_publications"/>
+            </column>
+            <column name="version" remarks="Entity version" type="java.sql.Types.INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" remarks="Publication title" type="java.sql.Types.VARCHAR(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text_language" remarks="Publication text language" type="java.sql.Types.VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="issue_date" remarks="Publication issue date" type="${timestamp.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="publication_type" remarks="Publication type" type="java.sql.Types.VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="publication_number" remarks="Publication number" type="java.sql.Types.VARCHAR(100)"/>
+        </createTable>
+        <sql dbms="postgresql">select setval('pub_publications_id_seq', ${id.start.value});</sql>
+    </changeSet>
+
+    <changeSet id="2021-06-29 #1 add link table between books and authors" author="Dmitriy Gerasimenko" context="prod">
+        <createTable tableName="pub_authors_publications">
+            <column name="id" remarks="Primary key" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_authors_publications"/>
+            </column>
+            <column name="author_id" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_authorspublications_author" nullable="false"
+                             referencedTableName="pub_authors" referencedColumnNames="id"/>
+            </column>
+            <column name="publication_id" type="java.sql.Types.BIGINT">
+                <constraints foreignKeyName="fk_authorspublications_publications" nullable="false"
+                             referencedTableName="pub_publications" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+        <sql dbms="postgresql">select setval('pub_authors_publications_id_seq', ${id.start.value});</sql>
+    </changeSet>
+
+    <changeSet id="2021-06-29 #1 add users and token tables" author="Dmitriy Gerasimenko" context="prod">
+        <createTable tableName="sec_users">
+            <column name="id" remarks="Primary key" type="java.sql.Types.BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="version" remarks="Entity version" type="java.sql.Types.INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="java.sql.Types.VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="java.sql.Types.VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="java.sql.Types.VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="java.sql.Types.VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="java.sql.Types.BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_role" type="java.sql.Types.VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql dbms="postgresql">select setval('sec_users_id_seq', ${id.start.value});</sql>
+    </changeSet>
 
 </databaseChangeLog>
